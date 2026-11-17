@@ -7,11 +7,26 @@
 def enter_grades():
     """Ask the user for grades and return them in a list."""
     grades = []
-    number_of_grades = int(input("How many grades will you enter? "))
+
+    while True:
+        try:
+            number_of_grades = int(input("How many grades will you enter? "))
+            if number_of_grades > 0:
+                break
+            print("Please enter a number greater than zero.")
+        except ValueError:
+            print("Please enter a whole number.")
 
     for grade_number in range(1, number_of_grades + 1):
-        grade = float(input(f"Enter grade {grade_number}: "))
-        grades.append(grade)
+        while True:
+            try:
+                grade = float(input(f"Enter grade {grade_number} (0-100): "))
+                if 0 <= grade <= 100:
+                    grades.append(grade)
+                    break
+                print("Grade must be between 0 and 100.")
+            except ValueError:
+                print("Please enter a valid number.")
 
     return grades
 
