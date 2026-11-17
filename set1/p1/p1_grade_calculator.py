@@ -50,6 +50,11 @@ def determine_status(grades):
 
 
 def show_results(grades):
+    if not grades:
+        print("Enter grades first so there are results to show.")
+        return
+
+    print("\n--- Grade Results ---")
     print(f"Average: {calculate_average(grades):.2f}")
     print(f"Highest grade: {get_highest_grade(grades):.2f}")
     print(f"Lowest grade: {get_lowest_grade(grades):.2f}")
@@ -57,9 +62,32 @@ def show_results(grades):
 
 
 def main():
-    grades = enter_grades()
-    show_results(grades)
+    grades = []
+
+    while True:
+        print("\n=== Student Grade Calculator ===")
+        print("1. Enter grades")
+        print("2. View results")
+        print("3. Exit")
+        choice = input("Choose an option: ").strip()
+
+        if choice == "1":
+            grades = enter_grades()
+            print(f"Saved {len(grades)} grade(s).")
+        elif choice == "2":
+            show_results(grades)
+        elif choice == "3":
+            print("Goodbye!")
+            break
+        else:
+            print("Invalid choice. Please choose 1, 2, or 3.")
 
 
 if __name__ == "__main__":
     main()
+
+
+# The grades variable inside main() is local because it is created within that function.
+# A local variable is only available inside the function where it is created.
+# A global variable is created outside all functions and can be accessed across the file.
+# This program passes grades to other functions instead of relying on a global variable.
